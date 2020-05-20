@@ -14,6 +14,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'youTubeVideoId',
+            title: 'YouTube Video Id',
+            type: 'string',
+        },
+        {
             name: 'newsletterSignupURL',
             title: 'URL For Newsletter Signup',
             type: 'string',
