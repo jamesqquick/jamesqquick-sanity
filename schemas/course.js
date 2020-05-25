@@ -29,6 +29,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'published',
+            title: 'Is it published?',
+            type: 'boolean',
+        },
+        {
             name: 'excerpt',
             title: 'Excerpt',
             type: 'text',
@@ -66,6 +71,46 @@ export default {
             name: 'mainContent',
             title: 'Main Content',
             type: 'richText',
+        },
+        {
+            name: 'whatYouGet',
+            title: 'What You Get',
+            type: 'array',
+            of: [{ type: 'block' }],
+        },
+        {
+            name: 'faq',
+            title: 'FAQ',
+            type: 'array',
+            of: [{ type: 'block' }],
+        },
+        {
+            name: 'courseOverview',
+            title: 'Course Overview',
+            type: 'array',
+            of: [{ type: 'block' }],
+        },
+        {
+            name: 'whoIsItFor',
+            title: 'Who Is It For',
+            type: 'array',
+            of: [{ type: 'block' }],
+        },
+        {
+            name: 'courseOutline',
+            title: 'Course Outline',
+            type: 'array',
+            of: [{ type: 'block' }],
+        },
+        {
+            name: 'fullCost',
+            title: 'Full Cost of the Course',
+            type: 'number',
+        },
+        {
+            name: 'discountCost',
+            title: 'Discount Cost of the Course',
+            type: 'number',
         },
     ],
 };
