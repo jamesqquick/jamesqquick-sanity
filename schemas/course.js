@@ -112,5 +112,10 @@ export default {
             title: 'Discount Cost of the Course',
             type: 'number',
         },
+        {
+            name: 'purchaseLink',
+            title: 'Link to purchase',
+            type: 'string',
+        },
     ],
 };
