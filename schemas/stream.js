@@ -14,6 +14,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'topic',
+            title: 'Topic',
+            type: 'string',
+        },
+        {
             name: 'videoLink',
             title: 'Link to the Video',
             type: 'string',
