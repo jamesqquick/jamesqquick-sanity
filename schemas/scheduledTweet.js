@@ -18,5 +18,10 @@ export default {
             title: 'Published Time',
             type: 'datetime',
         },
+        {
+            name: 'imageUrl',
+            title: 'Image Url',
+            type: 'string',
+        },
     ],
 };
