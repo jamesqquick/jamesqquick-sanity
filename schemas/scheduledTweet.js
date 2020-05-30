@@ -5,7 +5,7 @@ export default {
     fields: [
         {
             name: 'content',
-            title: 'Contest',
+            title: 'Content',
             type: 'string',
         },
         {
