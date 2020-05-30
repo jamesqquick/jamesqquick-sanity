@@ -9,6 +9,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'guestHandle',
+            title: 'Guest Twitter Handle',
+            type: 'string',
+        },
+        {
             name: 'videoLink',
             title: 'Link to the Video',
             type: 'string',

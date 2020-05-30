@@ -14,7 +14,7 @@ import course from './course';
 import resourceType from './resourceType';
 import resource from './resource';
 import myAwesomeImage from './myAwesomeImage';
-
+import scheduledTweet from './scheduledTweet';
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
     // We name our schema
@@ -35,5 +35,6 @@ export default createSchema({
         // { type: 'typename' } in other document schemas
         blockContent,
         myAwesomeImage,
+        scheduledTweet,
     ]),
 });
