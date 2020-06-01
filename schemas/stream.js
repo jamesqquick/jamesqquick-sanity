@@ -31,7 +31,7 @@ export default {
         {
             name: 'guestTitle',
             title: 'Guest Title',
-            type: 'text',
+            type: 'string',
         },
         {
             name: 'guestImage',
