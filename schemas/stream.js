@@ -29,6 +29,11 @@ export default {
             type: 'text',
         },
         {
+            name: 'guestTitle',
+            title: 'Guest Title',
+            type: 'text',
+        },
+        {
             name: 'guestImage',
             title: 'Guest image',
             type: 'image',
