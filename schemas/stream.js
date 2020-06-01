@@ -26,7 +26,7 @@ export default {
         {
             name: 'guestBio',
             title: 'Guest Bio',
-            type: 'string',
+            type: 'text',
         },
         {
             name: 'guestImage',
