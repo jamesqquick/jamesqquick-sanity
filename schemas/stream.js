@@ -29,6 +29,14 @@ export default {
             type: 'string',
         },
         {
+            name: 'guestImage',
+            title: 'Guest image',
+            type: 'image',
+            options: {
+                hotspot: true,
+            },
+        },
+        {
             name: 'videoLink',
             title: 'Link to the Video',
             type: 'string',
