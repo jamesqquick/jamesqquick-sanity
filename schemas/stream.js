@@ -19,6 +19,16 @@ export default {
             type: 'string',
         },
         {
+            name: 'guestName',
+            title: 'Guest Name',
+            type: 'string',
+        },
+        {
+            name: 'guestBio',
+            title: 'Guest Bio',
+            type: 'string',
+        },
+        {
             name: 'videoLink',
             title: 'Link to the Video',
             type: 'string',
