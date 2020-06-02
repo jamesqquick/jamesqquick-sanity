@@ -28,11 +28,13 @@ const getTweetsForStream = (record) => {
             new Date(record.publishedDate).getDate() - 2
         )
     );
+
     let imageUrl = null;
     if (record.coverImage) {
         console.log(record.coverImage.asset);
         imageUrl = `https://cdn.sanity.io/images/rx426fbd/production/${record.coverImage.asset._ref}`;
         imageUrl = imageUrl.replace('image-', '');
+        imageUrl = imageUrl.replace('-png', '.png');
     }
     const tweet1 = {
         publishTime: twoDaysBeforeDate,
