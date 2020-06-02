@@ -30,6 +30,7 @@ const getTweetsForStream = (record) => {
     );
     let imageUrl = null;
     if (record.coverImage) {
+        console.log(record.coverImage.asset);
         imageUrl = record.coverImage.asset.url;
     }
     const tweet1 = {
