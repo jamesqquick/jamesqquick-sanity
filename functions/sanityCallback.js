@@ -25,9 +25,14 @@ exports.handler = async (event) => {
                 record._type === 'stream' &&
                 new Date(record.publishedDate) > new Date()
         );
+        console.log(
+            `${updatedStreamRecords.length} record(s) have changed`,
+            updatedStreamRecords
+        );
         const retVal = [];
         const tweetPromises = updatedStreamRecords.map(async (record) => {
             const [tweet1, tweet2] = getTweetsForStream(record);
+            console.log('Tweets to schedule', tweet1, tweet2);
             await sanity.createOrReplace(tweet1);
             retVal.push(tweet1);
             await sanity.createOrReplace(tweet2);
