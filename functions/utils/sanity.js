@@ -30,7 +30,7 @@ const getTweetsForStream = (record) => {
     );
     let imageUrl = null;
     if (record.coverImage) {
-        imageUrl = `https://cdn.sanity.io/images/rx426fbd/production/`;
+        imageUrl = record.coverImage.asset.url;
     }
     const tweet1 = {
         publishTime: twoDaysBeforeDate,

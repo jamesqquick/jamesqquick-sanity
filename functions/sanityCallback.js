@@ -9,6 +9,12 @@ exports.handler = async (event) => {
         };
     }
     const { created, updated, deleted } = body.ids;
+    if (!created || !updated || !deleted) {
+        return {
+            statusCode: 400,
+            body: JSON.stringify({ err: 'Invalid requeest' }),
+        };
+    }
     const recordIds = [...new Set([...created, ...updated, ...deleted])];
     console.log('Records that have been updated', recordIds);
     try {
