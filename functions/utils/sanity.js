@@ -32,6 +32,7 @@ const getTweetsForStream = (record) => {
     if (record.coverImage) {
         console.log(record.coverImage.asset);
         imageUrl = `https://cdn.sanity.io/images/rx426fbd/production/${record.coverImage.asset._ref}`;
+        imageUrl = imageUrl.replace('image-', '');
     }
     const tweet1 = {
         publishTime: twoDaysBeforeDate,
