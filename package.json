@@ -24,7 +24,6 @@
     "@sanity/default-layout": "1.149.16-canary.202",
     "@sanity/default-login": "1.149.16-canary.202",
     "@sanity/desk-tool": "1.149.16-canary.202",
-    "@sanity/image-url": "^0.140.19",
     "@sanity/vision": "1.149.16-canary.202",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
