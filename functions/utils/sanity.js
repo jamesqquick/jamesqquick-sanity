@@ -6,6 +6,13 @@ const sanity = sanityClient({
     useCdn: false,
     token: process.env.SANITY_TOKEN,
 });
+import imageUrlBuilder from '@sanity/image-url';
+
+const builder = imageUrlBuilder(sanityClient);
+
+function urlFor(source) {
+    return builder.image(source);
+}
 
 const query = '*[_type == "scheduledTweet" ]';
 const params = {};
@@ -31,7 +38,7 @@ const getTweetsForStream = (record) => {
     let imageUrl = null;
     if (record.coverImage) {
         console.log(record.coverImage.asset);
-        imageUrl = record.coverImage.asset.url;
+        imageUrl = urlFor(record.coverImage);
     }
     const tweet1 = {
         publishTime: twoDaysBeforeDate,
