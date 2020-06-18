@@ -42,8 +42,8 @@ export default {
             },
         },
         {
-            name: 'videoLink',
-            title: 'Link to the Video',
+            name: 'videoId',
+            title: 'ID Of the YouTube Video',
             type: 'string',
         },
         {
