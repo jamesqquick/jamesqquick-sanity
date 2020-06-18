@@ -42,7 +42,7 @@ export default {
             },
         },
         {
-            name: 'videoId',
+            name: 'youTubeVideoId',
             title: 'ID Of the YouTube Video',
             type: 'string',
         },
