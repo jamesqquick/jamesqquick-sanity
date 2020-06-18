@@ -14,6 +14,11 @@ export default {
             type: 'string',
         },
         {
+            name: 'youTubeVideoId',
+            title: 'ID Of the YouTube Video',
+            type: 'string',
+        },
+        {
             name: 'excerpt',
             title: 'Excerpt',
             type: 'text',
