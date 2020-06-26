@@ -15,6 +15,8 @@ import resourceType from './resourceType';
 import resource from './resource';
 import myAwesomeImage from './myAwesomeImage';
 import scheduledTweet from './scheduledTweet';
+import richDate from 'part:@sanity/form-builder/input/rich-date/schema';
+
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
     // We name our schema
@@ -31,10 +33,9 @@ export default createSchema({
         resourceType,
         resource,
         course,
-        // When added to this list, object types can be used as
-        // { type: 'typename' } in other document schemas
         blockContent,
         myAwesomeImage,
         scheduledTweet,
+        richDate,
     ]),
 });

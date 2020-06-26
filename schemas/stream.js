@@ -1,3 +1,5 @@
+import richDate from 'part:@sanity/form-builder/input/rich-date/schema';
+
 export default {
     name: 'stream',
     title: 'Stream',
@@ -78,7 +80,7 @@ export default {
         {
             name: 'publishedDate',
             title: 'Published Date',
-            type: 'datetime',
+            type: 'richDate',
         },
         {
             name: 'body',

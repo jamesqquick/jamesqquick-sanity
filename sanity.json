@@ -1,36 +1,39 @@
 {
-    "root": true,
-    "project": {
-        "name": "jamesqquick"
+  "root": true,
+  "project": {
+    "name": "jamesqquick"
+  },
+  "api": {
+    "projectId": "rx426fbd",
+    "dataset": "production"
+  },
+  "plugins": [
+    "@sanity/base",
+    "@sanity/components",
+    "@sanity/default-layout",
+    "@sanity/default-login",
+    "@sanity/desk-tool",
+    "markdown",
+    "@sanity/code-input",
+    "@sanity/dashboard",
+    "dashboard-widget-netlify",
+    "@sanity/rich-date-input"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "@sanity/vision"
+      ]
+    }
+  },
+  "parts": [
+    {
+      "name": "part:@sanity/base/schema",
+      "path": "./schemas/schema"
     },
-    "api": {
-        "projectId": "rx426fbd",
-        "dataset": "production"
-    },
-    "plugins": [
-        "@sanity/base",
-        "@sanity/components",
-        "@sanity/default-layout",
-        "@sanity/default-login",
-        "@sanity/desk-tool",
-        "markdown",
-        "@sanity/code-input",
-        "@sanity/dashboard",
-        "dashboard-widget-netlify"
-    ],
-    "env": {
-        "development": {
-            "plugins": ["@sanity/vision"]
-        }
-    },
-    "parts": [
-        {
-            "name": "part:@sanity/base/schema",
-            "path": "./schemas/schema"
-        },
-        {
-            "implements": "part:@sanity/dashboard/config",
-            "path": "src/dashboardConfig.js"
-        }
-    ]
+    {
+      "implements": "part:@sanity/dashboard/config",
+      "path": "src/dashboardConfig.js"
+    }
+  ]
 }
