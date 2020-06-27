@@ -22,12 +22,6 @@ const getTweetsForStream = (record) => {
     if (!record) throw 'No record to work with';
     const streamTimeInMs = new Date(record.publishedDate.utc).getTime();
 
-    const twoDaysBeforeDate = new Date(
-        new Date(record.publishedDate.utc).setDate(
-            new Date(record.publishedDate.utc).getDate() - 2
-        )
-    );
-
     let imageUrl = null;
     if (record.coverImage) {
         console.log(record.coverImage.asset);
@@ -36,7 +30,7 @@ const getTweetsForStream = (record) => {
         imageUrl = imageUrl.replace('-png', '.png');
     }
     const tweet1 = {
-        publishTime: twoDaysBeforeDate,
+        publishTime: new Date(streamTimeInMs - 48 * 60 * 60 * 1000),
         content: `In 2 days my friend ${record.guestHandle} is going to join me to talk about ${record.topic} Come hang out!
         
         https://www.twitch.tv/jamesqquick`,
@@ -65,7 +59,15 @@ const getSendableTweets = async () => {
     const current = new Date();
     const readyTweets = allTweets.filter((tweet) => {
         const tweetTime = new Date(tweet.publishTime);
-        return tweetTime < current;
+
+        if (tweetTime > current) return false;
+        //If it's older than 30 minutes, forget it
+        const expiredThreshold = 30 * 60 * 1000;
+        if (current - tweetTime > expiredThreshold) {
+            console.warn(`Tweet ${tweet._id} is stale, it should be deleted`);
+            return false;
+        }
+        return true;
     });
     return readyTweets;
 };

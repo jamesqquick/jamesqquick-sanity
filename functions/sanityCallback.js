@@ -25,17 +25,17 @@ exports.handler = async (event) => {
         };
     }
     const { created, updated, deleted } = body.ids;
-    const recordIds = [...new Set([...created, ...updated, ...deleted])];
+    const recordIds = [...new Set([...created, ...updated])];
     console.log('Records that have been updated', recordIds);
     try {
         const updatedRecords = await sanity.getDocuments(recordIds);
+        console.log(updatedRecords);
         const updatedStreamRecords = updatedRecords.filter(
             (record) =>
                 record &&
                 record._type === 'stream' &&
                 new Date(record.publishedDate.utc) > new Date()
         );
-        console.log('Updated stream records', updatedStreamRecords);
         const retVal = [];
         const tweetPromises = updatedStreamRecords.map(async (record) => {
             const [tweet1, tweet2] = getTweetsForStream(record);
