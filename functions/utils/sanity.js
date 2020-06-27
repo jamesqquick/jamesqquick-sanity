@@ -59,12 +59,15 @@ const getSendableTweets = async () => {
     const current = new Date();
     const readyTweets = allTweets.filter((tweet) => {
         const tweetTime = new Date(tweet.publishTime);
-
         if (tweetTime > current) return false;
         //If it's older than 30 minutes, forget it
         const expiredThreshold = 30 * 60 * 1000;
         if (current - tweetTime > expiredThreshold) {
-            console.warn(`Tweet ${tweet._id} is stale, it should be deleted`);
+            console.warn(
+                `Tweet ${tweet._id} is stale, going to attempt to delete`
+            );
+            //TODO: is there a better way to handle the fact that this is async? Do we care if it fails? Maybe we just try again later :)
+            sanity.delete(tweet._id);
             return false;
         }
         return true;
