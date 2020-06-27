@@ -11,7 +11,6 @@ const query = '*[_type == "scheduledTweet" ]';
 const params = {};
 
 const getTweetsByStreamId = async (streamId) => {
-    console.log(streamId);
     const query = `*[_type == "scheduledTweet" && streamId == "${streamId}"]`;
     const params = {};
 
@@ -21,11 +20,11 @@ const getTweetsByStreamId = async (streamId) => {
 
 const getTweetsForStream = (record) => {
     if (!record) throw 'No record to work with';
-    const streamTimeInMs = new Date(record.publishedDate).getTime();
+    const streamTimeInMs = new Date(record.publishedDate.utc).getTime();
 
     const twoDaysBeforeDate = new Date(
-        new Date(record.publishedDate).setDate(
-            new Date(record.publishedDate).getDate() - 2
+        new Date(record.publishedDate.utc).setDate(
+            new Date(record.publishedDate.utc).getDate() - 2
         )
     );
 
