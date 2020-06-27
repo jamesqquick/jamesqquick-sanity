@@ -27,9 +27,12 @@ exports.handler = async (event) => {
     const { created, updated, deleted } = body.ids;
     const recordIds = [...new Set([...created, ...updated])];
     console.log('Records that have been updated', recordIds);
+    if (!recordIds.length > 0) {
+        console.log('No new records to work with');
+        return formatReturn(200, { msg: 'Nothing to do here' });
+    }
     try {
         const updatedRecords = await sanity.getDocuments(recordIds);
-        console.log(updatedRecords);
         const updatedStreamRecords = updatedRecords.filter(
             (record) =>
                 record &&
