@@ -35,6 +35,7 @@ exports.handler = async (event) => {
                 record._type === 'stream' &&
                 new Date(record.publishedDate.utc) > new Date()
         );
+        console.log('Updated stream records', updatedStreamRecords);
         const retVal = [];
         const tweetPromises = updatedStreamRecords.map(async (record) => {
             const [tweet1, tweet2] = getTweetsForStream(record);
@@ -44,7 +45,7 @@ exports.handler = async (event) => {
             retVal.push(tweet2);
         });
         await Promise.all(tweetPromises);
-
+        console.log('Scheduled tweets', retVal);
         return formatReturn(200, retVal);
     } catch (err) {
         console.error(err);
