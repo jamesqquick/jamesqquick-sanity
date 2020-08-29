@@ -48,11 +48,6 @@ export default {
             type: 'datetime',
         },
         {
-            name: 'body',
-            title: 'Body',
-            type: 'markdown',
-        },
-        {
             name: 'mainContent',
             title: 'Main Content',
             type: 'richText',
