@@ -26,11 +26,6 @@ export default {
             type: 'string',
         },
         {
-            name: 'guestBio',
-            title: 'Guest Bio',
-            type: 'richText',
-        },
-        {
             name: 'guestTitle',
             title: 'Guest Title',
             type: 'string',
