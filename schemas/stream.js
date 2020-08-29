@@ -83,10 +83,9 @@ export default {
             type: 'richDate',
         },
         {
-            name: 'body',
-            title: 'Body',
-            type: 'text',
-            rows: 4,
+            name: 'mainContent',
+            title: 'Main Content',
+            type: 'richText',
         },
     ],
 };

@@ -72,11 +72,11 @@ export default {
             title: 'Published Date',
             type: 'datetime',
         },
+
         {
-            name: 'body',
-            title: 'Body',
-            type: 'text',
-            rows: 4,
+            name: 'mainContent',
+            title: 'Main Content',
+            type: 'richText',
         },
     ],
 };

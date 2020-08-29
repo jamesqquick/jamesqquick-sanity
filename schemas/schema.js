@@ -13,6 +13,7 @@ import stream from './stream';
 import course from './course';
 import resourceType from './resourceType';
 import resource from './resource';
+import ytVideo from './ytVideo';
 import myAwesomeImage from './myAwesomeImage';
 import scheduledTweet from './scheduledTweet';
 import richDate from 'part:@sanity/form-builder/input/rich-date/schema';
@@ -37,5 +38,6 @@ export default createSchema({
         myAwesomeImage,
         scheduledTweet,
         richDate,
+        ytVideo,
     ]),
 });

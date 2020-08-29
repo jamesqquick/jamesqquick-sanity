@@ -37,6 +37,16 @@ export default {
             },
         },
         {
+            name: 'keywords',
+            type: 'array',
+            title: 'Keywords',
+            description: 'Add keywords that describes your blog.',
+            of: [{ type: 'string' }],
+            options: {
+                layout: 'tags',
+            },
+        },
+        {
             name: 'tags',
             title: 'Tags',
             type: 'array',
