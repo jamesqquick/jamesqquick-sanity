@@ -9,11 +9,6 @@ export default {
             type: 'string',
         },
         {
-            name: 'videoLink',
-            title: 'Link to the Video',
-            type: 'string',
-        },
-        {
             name: 'youTubeVideoId',
             title: 'ID Of the YouTube Video',
             type: 'string',
@@ -27,21 +22,6 @@ export default {
         {
             name: 'conference',
             title: 'Conference',
-            type: 'string',
-        },
-        {
-            name: 'slidesLink',
-            title: 'Slides Link',
-            type: 'string',
-        },
-        {
-            name: 'conferenceLink',
-            title: 'Conference Link',
-            type: 'string',
-        },
-        {
-            name: 'codeLink',
-            title: 'Code Link',
             type: 'string',
         },
         {

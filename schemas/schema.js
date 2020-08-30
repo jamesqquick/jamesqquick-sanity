@@ -14,8 +14,10 @@ import course from './course';
 import resourceType from './resourceType';
 import resource from './resource';
 import ytVideo from './ytVideo';
-import myAwesomeImage from './myAwesomeImage';
+import imageWithAlt from './imageWithAlt';
 import scheduledTweet from './scheduledTweet';
+import iconLink from './iconLink';
+import iconLinksList from './iconLinksList';
 import richDate from 'part:@sanity/form-builder/input/rich-date/schema';
 
 // Then we give our schema to the builder and provide the result to Sanity
@@ -35,9 +37,11 @@ export default createSchema({
         resource,
         course,
         blockContent,
-        myAwesomeImage,
+        imageWithAlt,
         scheduledTweet,
         richDate,
         ytVideo,
+        iconLink,
+        iconLinksList,
     ]),
 });

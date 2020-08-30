@@ -7,12 +7,18 @@ export default {
             type: 'block',
         },
         {
-            type: 'myAwesomeImage',
+            type: 'myImage',
         },
         {
             title: 'Code editor (default)',
             description: 'Code editor',
             type: 'code',
+        },
+        {
+            type: 'iconLink',
+        },
+        {
+            type: 'iconLinksList',
         },
     ],
 };

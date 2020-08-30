@@ -4,8 +4,8 @@ const preview = (props) => {
     return <pre>{JSON.stringify(props, null, 2)}</pre>;
 };
 export default {
-    name: 'myAwesomeImage',
-    title: 'My Awesome Image',
+    name: 'myImage',
+    title: 'My Image',
     type: 'image',
     options: {
         hotspot: true,
