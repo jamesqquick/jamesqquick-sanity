@@ -4,7 +4,7 @@ const preview = (props) => {
     return <pre>{JSON.stringify(props, null, 2)}</pre>;
 };
 export default {
-    name: 'myImage',
+    name: 'myAwesomeImage',
     title: 'My Image',
     type: 'image',
     options: {

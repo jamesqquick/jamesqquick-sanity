@@ -1,13 +1,13 @@
 export default {
     name: 'richText',
     type: 'array',
-    title: 'My Awesome Content',
+    title: 'My Content',
     of: [
         {
             type: 'block',
         },
         {
-            type: 'myImage',
+            type: 'myAwesomeImage',
         },
         {
             title: 'Code editor (default)',
