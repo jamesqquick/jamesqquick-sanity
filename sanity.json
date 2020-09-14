@@ -17,7 +17,8 @@
     "@sanity/code-input",
     "@sanity/dashboard",
     "dashboard-widget-netlify",
-    "@sanity/rich-date-input"
+    "@sanity/rich-date-input",
+    "media"
   ],
   "env": {
     "development": {
@@ -34,6 +35,10 @@
     {
       "implements": "part:@sanity/dashboard/config",
       "path": "src/dashboardConfig.js"
+    },
+    {
+      "implements": "part:@sanity/base/document-actions/resolver",
+      "path": "resolveDocumentActions.js"
     }
   ]
 }

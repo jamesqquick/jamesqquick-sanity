@@ -33,6 +33,7 @@
     "react-dom": "^16.2",
     "sanity-plugin-dashboard-widget-netlify": "^1.0.1",
     "sanity-plugin-markdown": "^1.0.1",
+    "sanity-plugin-media": "^0.2.13",
     "twitter": "^1.7.1"
   },
   "devDependencies": {}
