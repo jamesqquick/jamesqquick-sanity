@@ -13,7 +13,7 @@ export function CreateBlogPostCoverAction({
     const [isPublishing, setIsPublishing] = useState(false);
     const [isDialogOpen, setDialogOpen] = React.useState(false);
     const doc = draft || published;
-    const [coverTitle, setCoverTitle] = useState(doc.title);
+    const [coverTitle, setCoverTitle] = useState(doc?.title);
 
     useEffect(() => {
         if (isPublishing && !draft) {
@@ -22,7 +22,7 @@ export function CreateBlogPostCoverAction({
     }, [draft]);
 
     const createAndAttachCover = async () => {
-        const title = doc.title;
+        const title = doc?.title;
         if (!title) return;
 
         setIsPublishing(true);
