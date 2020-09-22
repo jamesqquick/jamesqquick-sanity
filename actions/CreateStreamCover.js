@@ -1,7 +1,7 @@
 import { useDocumentOperation } from '@sanity/react-hooks';
 import React, { useState, useEffect } from 'react';
 
-export function CreateBlogPostCoverAction({
+export function CreateStreamCoverAction({
     draft,
     published,
     id,
@@ -12,7 +12,8 @@ export function CreateBlogPostCoverAction({
     const [isPublishing, setIsPublishing] = useState(false);
     const [isDialogOpen, setDialogOpen] = React.useState(false);
     const doc = draft || published;
-    const [coverTitle, setCoverTitle] = useState(doc?.title);
+    const [guestImage, setGuestImage] = useState('');
+    const [time, setTime] = useState('');
 
     useEffect(() => {
         if (isPublishing && !draft) {
@@ -21,19 +22,24 @@ export function CreateBlogPostCoverAction({
     }, [draft]);
 
     const createAndAttachCover = async () => {
-        const title = doc?.title;
-        if (!title) return;
+        const topic = doc?.topic;
+        console.log(doc);
+        if (!topic || !doc?.guestName || !doc?.guestTitle) return;
 
         setIsPublishing(true);
 
         try {
             await fetch(
-                'https://jqq-utils.netlify.app/.netlify/functions/createBlogPostCover',
+                'https://jqq-utils.netlify.app/.netlify/functions/lqCover',
                 {
                     method: 'POST',
                     body: JSON.stringify({
-                        title: coverTitle,
-                        id: id,
+                        title: topic,
+                        guestName: doc.guestName,
+                        guestTitle: doc.guestTitle,
+                        guestImage,
+                        time,
+                        id,
                     }),
                 }
             );
@@ -48,7 +54,7 @@ export function CreateBlogPostCoverAction({
     return {
         disabled: !published,
         label:
-            type !== 'post'
+            type !== 'stream'
                 ? null
                 : isPublishing
                 ? 'Generating image...'
@@ -64,10 +70,22 @@ export function CreateBlogPostCoverAction({
             content: (
                 <>
                     <h2>Cover Image Title</h2>
+
+                    <label htmlFor="guestImage">guestImage</label>
+
                     <input
                         type="text"
-                        value={coverTitle}
-                        onChange={(e) => setCoverTitle(e.target.value)}
+                        value={guestImage}
+                        id="guestImage"
+                        onChange={(e) => setGuestImage(e.target.value)}
+                    />
+                    <label htmlFor="time">Time</label>
+
+                    <input
+                        id="time"
+                        type="text"
+                        value={time}
+                        onChange={(e) => setTime(e.target.value)}
                     />
                     <button
                         onClick={async (event) => await createAndAttachCover()}
