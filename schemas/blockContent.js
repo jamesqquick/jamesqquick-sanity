@@ -20,5 +20,8 @@ export default {
         {
             type: 'iconLinksList',
         },
+        {
+            type: 'ytVideo',
+        },
     ],
 };
