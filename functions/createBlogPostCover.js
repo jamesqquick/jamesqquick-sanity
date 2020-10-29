@@ -1,7 +1,7 @@
 const { generateBlogPostCover } = require('./utils/BlogUtils');
 const simpleReturn = require('netlify-functions-simple-return');
 const fetch = require('node-fetch');
-const { client: sanityClient } = require('./utils/sanity');
+const { sanity: sanityClient } = require('./utils/sanity');
 exports.handler = async (event) => {
     const headers = {
         'access-control-allow-origin': '*',

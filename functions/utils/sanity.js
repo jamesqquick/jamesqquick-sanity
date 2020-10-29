@@ -1,10 +1,11 @@
 require('dotenv').config();
 const sanityClient = require('@sanity/client');
+
 const sanity = sanityClient({
-    projectId: 'rx426fbd',
-    dataset: 'production',
-    useCdn: false,
+    projectId: process.env.SANITY_PROJECT_ID,
+    dataset: process.env.SANITY_DATASET_NAME,
     token: process.env.SANITY_TOKEN,
+    useCdn: false,
 });
 
 const query = '*[_type == "scheduledTweet" ]';
