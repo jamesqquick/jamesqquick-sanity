@@ -18,32 +18,42 @@ export function CreateStreamCoverAction({
     }, [draft]);
 
     const createAndAttachCover = async () => {
-        const topic = doc?.topic;
         console.log(doc);
-        if (!topic || !doc?.guestName || !doc?.guestTitle) return;
+        // return;
+        if (
+            !doc?.topic ||
+            !doc?.guestName ||
+            !doc?.guestTitle ||
+            !doc?.publishedDate ||
+            !doc?.guestImageName
+        )
+            return;
 
-        // setIsPublishing(true);
+        const { local } = doc.publishedDate;
+        const date = new Date(local);
+        const time = `${date
+            .toDateString()
+            .substring(0, 10)}, ${date.getHours()}:00 CDT`;
 
-        // try {
-        //     await fetch(
-        //         '/.netlify/functions/lqCover',
-        //         {
-        //             method: 'POST',
-        //             body: JSON.stringify({
-        //                 title: topic,
-        //                 guestName: doc.guestName,
-        //                 guestTitle: doc.guestTitle,
-        //                 guestImage,
-        //                 time,
-        //                 id,
-        //             }),
-        //         }
-        //     );
-        // } catch (err) {
-        //     console.error(err);
-        // } finally {
-        //     onComplete();
-        // }
+        setIsPublishing(true);
+
+        try {
+            await fetch('/.netlify/functions/lqCover', {
+                method: 'POST',
+                body: JSON.stringify({
+                    title: doc.topic,
+                    guestName: doc.guestName,
+                    guestTitle: doc.guestTitle,
+                    guestImageName: doc.guestImageName,
+                    time,
+                    id: doc._id,
+                }),
+            });
+        } catch (err) {
+            console.error(err);
+        } finally {
+            onComplete();
+        }
     };
 
     return {
