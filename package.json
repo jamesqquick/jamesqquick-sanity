@@ -28,6 +28,7 @@
     "@sanity/vision": "^2.0.5",
     "axios": "^0.19.2",
     "dotenv": "^8.2.0",
+    "netlify-functions-simple-return": "^1.0.0",
     "prop-types": "^15.6",
     "react": "^16.2",
     "react-dom": "^16.2",
