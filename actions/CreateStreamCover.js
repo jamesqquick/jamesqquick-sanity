@@ -8,12 +8,8 @@ export function CreateStreamCoverAction({
     type,
     onComplete,
 }) {
-    const { patch, publish } = useDocumentOperation(id, type);
     const [isPublishing, setIsPublishing] = useState(false);
-    const [isDialogOpen, setDialogOpen] = React.useState(false);
     const doc = draft || published;
-    const [guestImage, setGuestImage] = useState('');
-    const [time, setTime] = useState('');
 
     useEffect(() => {
         if (isPublishing && !draft) {
@@ -26,74 +22,43 @@ export function CreateStreamCoverAction({
         console.log(doc);
         if (!topic || !doc?.guestName || !doc?.guestTitle) return;
 
-        setIsPublishing(true);
+        // setIsPublishing(true);
 
-        try {
-            await fetch(
-                'https://jqq-utils.netlify.app/.netlify/functions/lqCover',
-                {
-                    method: 'POST',
-                    body: JSON.stringify({
-                        title: topic,
-                        guestName: doc.guestName,
-                        guestTitle: doc.guestTitle,
-                        guestImage,
-                        time,
-                        id,
-                    }),
-                }
-            );
-        } catch (err) {
-            console.error(err);
-        } finally {
-            onComplete();
-            setDialogOpen(false);
-        }
+        // try {
+        //     await fetch(
+        //         '/.netlify/functions/lqCover',
+        //         {
+        //             method: 'POST',
+        //             body: JSON.stringify({
+        //                 title: topic,
+        //                 guestName: doc.guestName,
+        //                 guestTitle: doc.guestTitle,
+        //                 guestImage,
+        //                 time,
+        //                 id,
+        //             }),
+        //         }
+        //     );
+        // } catch (err) {
+        //     console.error(err);
+        // } finally {
+        //     onComplete();
+        // }
     };
 
     return {
-        disabled: !published,
+        disabled:
+            !doc?.topic ||
+            !doc?.guestName ||
+            !doc?.guestTitle ||
+            !doc?.publishedDate ||
+            !doc?.guestImageName,
         label:
             type !== 'stream'
                 ? null
                 : isPublishing
                 ? 'Generating image...'
                 : 'Create Cover Image',
-        onHandle: async () => {
-            setDialogOpen(true);
-        },
-        dialog: isDialogOpen && {
-            type: 'modal',
-            onClose: () => {
-                setDialogOpen(false);
-            },
-            content: (
-                <>
-                    <h2>Cover Image Title</h2>
-
-                    <label htmlFor="guestImage">guestImage</label>
-
-                    <input
-                        type="text"
-                        value={guestImage}
-                        id="guestImage"
-                        onChange={(e) => setGuestImage(e.target.value)}
-                    />
-                    <label htmlFor="time">Time</label>
-
-                    <input
-                        id="time"
-                        type="text"
-                        value={time}
-                        onChange={(e) => setTime(e.target.value)}
-                    />
-                    <button
-                        onClick={async (event) => await createAndAttachCover()}
-                    >
-                        Create Cover Image
-                    </button>
-                </>
-            ),
-        },
+        onHandle: createAndAttachCover,
     };
 }

@@ -26,6 +26,12 @@ export default {
             type: 'string',
         },
         {
+            name: 'guestImageName',
+            title:
+                'Guest Image Name (image should already be uploaded to Cloudinary)',
+            type: 'string',
+        },
+        {
             name: 'guestTitle',
             title: 'Guest Title',
             type: 'string',
