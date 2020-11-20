@@ -32,7 +32,7 @@ exports.handler = async (event) => {
         );
         console.log(url);
         const res = await fetch(url);
-
+        console.log(res);
         const imageAsset = await sanityClient.assets.upload('image', res.body, {
             filename: title,
         });
