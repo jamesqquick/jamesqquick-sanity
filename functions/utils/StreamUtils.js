@@ -81,4 +81,21 @@ const generateLearningQuickCoverURL = (
     return url;
 };
 
-module.exports = { generateLearningQuickCoverURL };
+const uploadGuestProfilePicIfNotExists = async (
+    guestImageName,
+    guestImageURL
+) => {
+    try {
+        await cloudinary.uploader.upload(guestImageURL, {
+            public_id: `learning_quick/${guestImageName}`,
+        });
+        return guestImageName;
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+module.exports = {
+    generateLearningQuickCoverURL,
+    uploadGuestProfilePicIfNotExists,
+};

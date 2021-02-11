@@ -1,7 +1,8 @@
-const { generateLearningQuickCoverURL } = require('./utils/StreamUtils');
+const {
+    generateLearningQuickCoverURL,
+    uploadGuestProfilePicIfNotExists,
+} = require('./utils/StreamUtils');
 const simpleReturn = require('netlify-functions-simple-return');
-const fetch = require('node-fetch');
-const { sanity: sanityClient } = require('./utils/sanity');
 exports.handler = async (event) => {
     const headers = {
         'access-control-allow-origin': '*',
@@ -19,9 +20,21 @@ exports.handler = async (event) => {
         };
     }
     const body = JSON.parse(event.body);
-    const { title, guestName, guestTitle, guestImageName, time, id } = body;
+    const { title, guestName, guestTitle, guestImageURL, time } = body;
+
+    if (!title || !guestName || !guestTitle || !guestImageURL || !time) {
+        return {
+            statusCode: 400, // <-- Important!
+            headers,
+            body: JSON.stringify({ err: 'All parameters are required.' }),
+        };
+    }
 
     try {
+        const guestImageName = `${guestName.split(' ')[0]}-${
+            guestName.split(' ')[1]
+        }`;
+        uploadGuestProfilePicIfNotExists(guestImageName, guestImageURL);
         const url = generateLearningQuickCoverURL(
             title,
             guestName,
@@ -30,27 +43,12 @@ exports.handler = async (event) => {
             time,
             id
         );
-        console.log(url);
-        const res = await fetch(url);
-        console.log(res);
-        const imageAsset = await sanityClient.assets.upload('image', res.body, {
-            filename: title,
-        });
 
-        const updatedRecord = await sanityClient
-            .patch(id)
-            .set({
-                coverImage: {
-                    _type: 'image',
-                    asset: {
-                        _type: 'reference',
-                        _ref: imageAsset._id,
-                    },
-                },
-            })
-            .commit();
-
-        return { statusCode: 200, body: JSON.stringify({ url }), headers };
+        return {
+            statusCode: 200,
+            body: JSON.stringify({ url }),
+            headers,
+        };
     } catch (err) {
         console.error(err);
         return {
