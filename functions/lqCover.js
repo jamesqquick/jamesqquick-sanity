@@ -40,8 +40,7 @@ exports.handler = async (event) => {
             guestName,
             guestTitle,
             guestImageName,
-            time,
-            id
+            time
         );
 
         return {
