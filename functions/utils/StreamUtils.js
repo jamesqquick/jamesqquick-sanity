@@ -86,6 +86,7 @@ const uploadGuestProfilePicIfNotExists = async (
     guestImageURL
 ) => {
     console.log(guestImageURL);
+    console.log(guestName);
     try {
         const res = await cloudinary.uploader.upload(guestImageURL, {
             public_id: `learning_quick/${guestImageName}`,
