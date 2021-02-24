@@ -24,7 +24,7 @@ exports.handler = async (event) => {
 
     if (!title || !guestName || !guestTitle || !guestImageURL || !time) {
         return {
-            statusCode: 400, // <-- Important!
+            statusCode: 400,
             headers,
             body: JSON.stringify({ err: 'All parameters are required.' }),
         };
@@ -34,7 +34,7 @@ exports.handler = async (event) => {
         const guestImageName = `${guestName.split(' ')[0]}-${
             guestName.split(' ')[1]
         }`;
-        uploadGuestProfilePicIfNotExists(guestImageName, guestImageURL);
+        await uploadGuestProfilePicIfNotExists(guestImageName, guestImageURL);
         const url = generateLearningQuickCoverURL(
             title,
             guestName,
