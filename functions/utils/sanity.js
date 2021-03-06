@@ -76,9 +76,50 @@ const getSendableTweets = async () => {
     return readyTweets;
 };
 
+const addOrUpdateStream = async ({
+    title: topic,
+    guestName,
+    guestTitle,
+    time: publishedDate,
+    twitterHandle: guestHandle,
+    coverImageUrl: coverImage,
+    profilepic: guestImage,
+}) => {
+    const fullTitle = `${topic} with ${guestName}`;
+    const query = `*[_type == "stream" && title == "${fullTitle}"]`;
+    const params = {};
+
+    const records = await sanity.fetch(query, params);
+    const newStream = {
+        _type: 'stream',
+        title: fullTitle,
+        topic,
+        guestName,
+        guestTitle,
+        publishedDate: {
+            _type: 'richDate',
+            utc: publishedDate,
+        },
+        guestHandle,
+    };
+    if (records.length > 0) {
+        const existingRecord = records[0];
+        const updatedRecord = await sanity
+            .patch(existingRecord._id)
+            .set(newStream)
+            .commit();
+        return updatedRecord;
+    } else {
+        //TODO: Upload images for user and promo? - don't think we can do this from serverless function since we can't create a writable stream
+        const createdStream = sanity.create(newStream);
+        return createdStream;
+    }
+};
+
 module.exports = {
     sanity,
     getSendableTweets,
     getTweetsByStreamId,
     getTweetsForStream,
+    addOrUpdateStream,
 };

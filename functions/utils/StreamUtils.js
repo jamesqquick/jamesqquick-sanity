@@ -1,12 +1,12 @@
 require('dotenv').config();
 const { cloudinary } = require('./cloudinary');
-const generateLearningQuickCoverURL = (
+const generateLearningQuickCoverURL = ({
     title,
     guestName,
     guestTitle,
     guestImageName,
-    time
-) => {
+    time,
+}) => {
     const url = cloudinary.url('learning_quick/lg-bg-2', {
         transformation: [
             {

@@ -1,9 +1,4 @@
-const {
-    generateLearningQuickCoverURL,
-    uploadGuestProfilePicIfNotExists,
-} = require('./utils/StreamUtils');
 const { addOrUpdateStream } = require('./utils/sanity');
-const simpleReturn = require('netlify-functions-simple-return');
 exports.handler = async (event) => {
     const headers = {
         'access-control-allow-origin': '*',
@@ -21,9 +16,24 @@ exports.handler = async (event) => {
         };
     }
     const body = JSON.parse(event.body);
-    const { title, guestName, guestTitle, guestImageURL, time } = body;
+    const {
+        title,
+        guestName,
+        guestTitle,
+        guestImageURL,
+        time,
+        twitterHandle,
+        coverImageUrl,
+    } = body;
 
-    if (!title || !guestName || !guestTitle || !guestImageURL || !time) {
+    if (
+        !title ||
+        !guestName ||
+        !guestTitle ||
+        !guestImageURL ||
+        !time ||
+        !twitterHandle
+    ) {
         return {
             statusCode: 400,
             headers,
@@ -32,16 +42,11 @@ exports.handler = async (event) => {
     }
 
     try {
-        const guestImageName = `${guestName.split(' ')[0]}-${
-            guestName.split(' ')[1]
-        }`;
-        await uploadGuestProfilePicIfNotExists(guestImageName, guestImageURL);
-        const url = generateLearningQuickCoverURL(body);
         const stream = await addOrUpdateStream(body);
-
+        console.log('Added stream', stream);
         return {
             statusCode: 200,
-            body: JSON.stringify({ url }),
+            body: JSON.stringify(stream),
             headers,
         };
     } catch (err) {
