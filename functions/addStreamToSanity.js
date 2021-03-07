@@ -26,14 +26,7 @@ exports.handler = async (event) => {
         coverImageUrl,
     } = body;
 
-    if (
-        !title ||
-        !guestName ||
-        !guestTitle ||
-        !guestImageURL ||
-        !time ||
-        !twitterHandle
-    ) {
+    if (!title || !guestName || !guestTitle || !time || !twitterHandle) {
         return {
             statusCode: 400,
             headers,

@@ -1,12 +1,15 @@
 require('dotenv').config();
 const sanityClient = require('@sanity/client');
-
+const fs = require('fs');
+const request = require('request');
 const sanity = sanityClient({
     projectId: process.env.SANITY_PROJECT_ID,
     dataset: process.env.SANITY_DATASET_NAME,
     token: process.env.SANITY_TOKEN,
     useCdn: false,
 });
+const { basename } = require('path');
+const slug = require('slug');
 
 const query = '*[_type == "scheduledTweet" ]';
 const params = {};
@@ -82,14 +85,11 @@ const addOrUpdateStream = async ({
     guestTitle,
     time: publishedDate,
     twitterHandle: guestHandle,
-    coverImageUrl: coverImage,
-    profilepic: guestImage,
+    coverImageUrl,
+    profilepic,
 }) => {
     const fullTitle = `${topic} with ${guestName}`;
-    const query = `*[_type == "stream" && title == "${fullTitle}"]`;
-    const params = {};
-
-    const records = await sanity.fetch(query, params);
+    console.log(publishedDate);
     const newStream = {
         _type: 'stream',
         title: fullTitle,
@@ -99,21 +99,51 @@ const addOrUpdateStream = async ({
         publishedDate: {
             _type: 'richDate',
             utc: publishedDate,
+            local: publishedDate,
+            timezone: '	Etc/UTC',
         },
         guestHandle,
     };
-    if (records.length > 0) {
-        const existingRecord = records[0];
+    const existingRecords = await getExistingStreamsByTitle(fullTitle);
+    if (existingRecords.length > 0) {
+        const existingRecord = existingRecords[0];
         const updatedRecord = await sanity
             .patch(existingRecord._id)
             .set(newStream)
             .commit();
         return updatedRecord;
     } else {
-        //TODO: Upload images for user and promo? - don't think we can do this from serverless function since we can't create a writable stream
-        const createdStream = sanity.create(newStream);
-        return createdStream;
+        return await uploadNewStream(newStream, coverImageUrl);
     }
+};
+
+const getExistingStreamsByTitle = async (title) => {
+    const query = `*[_type == "stream" && title == "${title}"]`;
+    const params = {};
+    return await sanity.fetch(query, params);
+};
+
+const uploadNewStream = async (newStream, coverImageUrl) => {
+    const uploadedCoverImage = await uploadImage(coverImageUrl);
+    newStream['coverImage'] = {
+        _type: 'image',
+        asset: {
+            _ref: uploadedCoverImage._id,
+            _type: 'reference',
+        },
+    };
+    newStream['slug'] = {
+        _type: 'slug',
+        current: slug(newStream.title),
+    };
+    const createdStream = sanity.create(newStream);
+    return createdStream;
+};
+
+const uploadImage = async (imageUrl) => {
+    return await sanity.assets.upload('image', request(imageUrl), {
+        filename: basename(imageUrl),
+    });
 };
 
 module.exports = {

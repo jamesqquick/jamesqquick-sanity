@@ -89,4 +89,10 @@ export default {
             type: 'richText',
         },
     ],
+    preview: {
+        select: {
+            title: 'title',
+            media: 'coverImage', // Use the userPortait image field as thumbnail
+        },
+    },
 };
