@@ -26,6 +26,7 @@
     "@sanity/desk-tool": "^2.6.1",
     "@sanity/rich-date-input": "^2.0.5",
     "@sanity/vision": "^2.0.5",
+    "airtable": "^0.10.1",
     "axios": "^0.19.2",
     "cloudinary": "^1.23.0",
     "dotenv": "^8.2.0",
@@ -38,6 +39,7 @@
     "sanity-plugin-dashboard-widget-netlify": "^1.0.1",
     "sanity-plugin-markdown": "^1.0.1",
     "sanity-plugin-media": "^0.2.13",
+    "showdown": "^1.9.1",
     "slug": "^4.0.3",
     "twitter": "^1.7.1"
   },

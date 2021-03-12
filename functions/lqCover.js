@@ -36,8 +36,11 @@ exports.handler = async (event) => {
             guestName.split(' ')[1]
         }`;
         await uploadGuestProfilePicIfNotExists(guestImageName, guestImageURL);
-        const url = generateLearningQuickCoverURL(body);
-        const stream = await addOrUpdateStream(body);
+        const url = generateLearningQuickCoverURL({
+            ...body,
+            guestImageName,
+        });
+        //const stream = await addOrUpdateStream(body);
 
         return {
             statusCode: 200,

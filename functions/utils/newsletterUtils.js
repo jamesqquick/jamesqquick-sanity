@@ -1,0 +1,83 @@
+const {
+    getCurrentNewsletter,
+    getRecentVideos,
+    getShares,
+    getCurrentStream,
+} = require('./airtable');
+const showdown = require('showdown');
+const converter = new showdown.Converter();
+
+const generateNewsletter = async () => {
+    const newsletterInfo = await getCurrentNewsletter();
+    const videos = await getRecentVideos();
+    const shares = await getShares();
+    const streamInfo = await getCurrentStream();
+    const headerTemplate = getHeaderTemplate(newsletterInfo);
+    const streamTemplate = getStreamTemplate(streamInfo);
+    const recentVideosTemplate = getJQQLinksTemplate(videos);
+    const sharesTempalte = getLBTLinksTemplate(shares);
+    const promoTemplate = getPromoTemplate();
+    const footerTemplate = getFooterTemplate();
+    return [
+        headerTemplate,
+        streamTemplate,
+        recentVideosTemplate,
+        sharesTempalte,
+        promoTemplate,
+        footerTemplate,
+    ].join('<br>');
+};
+
+const getLBTLinksTemplate = (records) => {
+    const header = `<h1>Content From the #LearnBuildTeach Community
+</h1><br>
+<p>Learn.Build.Teach. is a personal philosophy and community. Here's the latest content from our Discord community.
+</p>`;
+    const closing = `<p>Want to share your work and learn from others? You can join the community <a href="https://discord.gg/vM2bagU">here.</a></p>
+`;
+    const links = records
+        .map(
+            (record) =>
+                `<li><a href="${record.link}">${record.title}</a> by ${record.discordUser}</li>`
+        )
+        .join('');
+    return header + links + '<br>' + closing;
+};
+
+const getJQQLinksTemplate = (records) => {
+    const header = `<h1>Recent Videos</h1>`;
+
+    const links = records
+        .map(
+            (record) => `<li><a href="${record.link}">${record.title}</a></li>`
+        )
+        .join('');
+    return header + '</br>' + links;
+};
+
+const getStreamTemplate = (streamInfo) => {
+    let coverImageURL;
+    if (streamInfo.coverImage.length > 0) {
+        coverImageURL = streamInfo.coverImage[0].url;
+    }
+    return `<h1>Today's Stream - ${streamInfo.streamTitle} with ${streamInfo.fullName}</h1>
+  <img src="${coverImageURL}"/><br>
+  <p>We will go live at 11 am CST on Twitch! <a href="https://www.twitch.tv/jamesqquick">Join us on Twitch!</a></p>`;
+};
+
+const getPromoTemplate = () => {
+    return `<h1>I'm Starting a Podcast - Compressed.fm</h1>
+  <p>This is something I've thought about for a while and when Amy Dutton asked if I would be interested, I ran with it. We'll be doing <bold>weekly episodes covering both Web Development and Web Design</bold>. We'll release our first episodes in April</p>
+  <p>To stay up to date with our progress, <a href="http://compressed.fm/"><strong>sign up for the newsletter</strong></a>.</p>`;
+};
+
+const getHeaderTemplate = (newsletterInfo) => {
+    const introHTML = converter.makeHtml(newsletterInfo.intro);
+    return `${introHTML}<p>Let me know your thoughts by commenting on this <a href="${newsletterInfo.tweetLink}">tweet</a></p>`;
+};
+
+const getFooterTemplate = () => {
+    return `<p>P.S. Don't forget to follow me on <a href="https://twitter.com/jamesqquick">Twitter</a> and subscribe to <a href="https://www.youtube.com/c/jamesqquick">my YouTube channel</a> for more great content.</p>`;
+};
+
+module.exports = { generateNewsletter };

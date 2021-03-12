@@ -1,5 +1,6 @@
 require('dotenv').config();
 const { cloudinary } = require('./cloudinary');
+const { wrapTitleWords } = require('./StringUtils');
 const generateLearningQuickCoverURL = ({
     title,
     guestName,
@@ -7,21 +8,41 @@ const generateLearningQuickCoverURL = ({
     guestImageName,
     time,
 }) => {
+    console.log(guestImageName);
+    const [firstLine, secondLine] = wrapTitleWords(title, 12);
+    console.log('HEYYYYYYYYYYYYYYYYY');
+    console.log(firstLine, secondLine);
     const url = cloudinary.url('learning_quick/lg-bg-2', {
         transformation: [
             {
                 overlay: {
                     font_family: 'Montserrat',
                     font_size: 120,
-                    font_weight: 600,
-                    text: title.toUpperCase(),
+                    font_weight: 500,
+                    text: firstLine.toUpperCase(),
                     text_align: 'right',
                 },
                 width: 1000,
                 crop: 'fit',
                 color: '#0E142E',
                 effect: 'colorize',
-                y: '-150',
+                y: '-280',
+                x: '50',
+                gravity: 'east',
+            },
+            {
+                overlay: {
+                    font_family: 'Montserrat',
+                    font_size: 180,
+                    font_weight: 700,
+                    text: secondLine.toUpperCase(),
+                    text_align: 'right',
+                },
+                width: 1000,
+                crop: 'fit',
+                color: '#ffffff',
+                effect: 'colorize',
+                y: '-130',
                 x: '50',
                 gravity: 'east',
             },
@@ -33,7 +54,7 @@ const generateLearningQuickCoverURL = ({
                 },
                 color: '#ffffff',
                 effect: 'colorize',
-                y: '450',
+                y: '500',
                 x: '50',
                 gravity: 'south_east',
             },
@@ -46,7 +67,7 @@ const generateLearningQuickCoverURL = ({
                 },
                 color: '#0E142E',
                 effect: 'colorize',
-                y: '350',
+                y: '400',
                 x: '50',
                 width: '1000',
                 crop: 'fit',
@@ -60,24 +81,26 @@ const generateLearningQuickCoverURL = ({
                 },
                 color: '#ffffff',
                 effect: 'colorize',
-                y: '300',
+                y: '350',
                 x: '50',
                 width: 1000,
                 crop: 'fit',
                 gravity: 'south_east',
             },
-            // {
-            //     overlay: {
-            //         font_family: 'Montserrat',
-            //         font_size: 60,
-            //         text: time,
-            //     },
-            //     color: '#de5254',
-            //     effect: 'colorize',
-            //     y: '50',
-            //     width: '600',
-            //     gravity: 'south',
-            // },
+            {
+                overlay: {
+                    font_family: 'Montserrat',
+                    font_size: 60,
+                    text: time,
+                    fontWeight: 'bold',
+                },
+                color: '#ffffff',
+                effect: 'colorize',
+                y: '120',
+                x: '50',
+                width: '600',
+                gravity: 'south_east',
+            },
             // {
             //     overlay: 'learning_quick:me.png',
             //     height: '300',
