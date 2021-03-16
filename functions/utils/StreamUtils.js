@@ -96,7 +96,7 @@ const generateLearningQuickCoverURL = ({
                 },
                 color: '#ffffff',
                 effect: 'colorize',
-                y: '100',
+                y: '105',
                 x: '50',
                 width: '600',
                 gravity: 'south_east',
