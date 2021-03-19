@@ -72,8 +72,9 @@ const getPromoTemplate = () => {
 };
 
 const getHeaderTemplate = (newsletterInfo) => {
-    const introHTML = converter.makeHtml(newsletterInfo.intro);
-    return `${introHTML}<p>Let me know your thoughts by commenting on this <a href="${newsletterInfo.tweetLink}">tweet</a></p>`;
+    const { intro } = newsletterInfo;
+    const introHTML = converter.makeHtml(intro);
+    return introHTML;
 };
 
 const getFooterTemplate = () => {
