@@ -10,7 +10,6 @@ const generateLearningQuickCoverURL = ({
 }) => {
     console.log(guestImageName);
     const [firstLine, secondLine] = wrapTitleWords(title, 12);
-    console.log('HEYYYYYYYYYYYYYYYYY');
     console.log(firstLine, secondLine);
     const url = cloudinary.url('learning_quick/lg-bg-2', {
         transformation: [
