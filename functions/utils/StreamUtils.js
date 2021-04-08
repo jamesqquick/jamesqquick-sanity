@@ -16,7 +16,7 @@ const generateLearningQuickCoverURL = ({
             {
                 overlay: {
                     font_family: 'Montserrat',
-                    font_size: 120,
+                    font_size: 110,
                     font_weight: 500,
                     text: firstLine.toUpperCase(),
                     text_align: 'right',
@@ -32,12 +32,12 @@ const generateLearningQuickCoverURL = ({
             {
                 overlay: {
                     font_family: 'Montserrat',
-                    font_size: 130,
+                    font_size: 120,
                     font_weight: 700,
                     text: secondLine.toUpperCase(),
                     text_align: 'right',
                 },
-                width: 1050,
+                width: 1100,
                 crop: 'fit',
                 color: '#ffffff',
                 effect: 'colorize',
