@@ -11,17 +11,17 @@ const generateLearningQuickCoverURL = ({
     console.log(guestImageName);
     const [firstLine, secondLine] = wrapTitleWords(title, 12);
     console.log(firstLine, secondLine);
-    const url = cloudinary.url('learning_quick/lg-bg-2', {
+    const url = cloudinary.url('learning_quick/lg-bg-3', {
         transformation: [
             {
                 overlay: {
                     font_family: 'Montserrat',
-                    font_size: 120,
+                    font_size: 130,
                     font_weight: 500,
                     text: firstLine.toUpperCase(),
                     text_align: 'right',
                 },
-                width: 1000,
+                width: 1150,
                 crop: 'fit',
                 color: '#0E142E',
                 effect: 'colorize',
@@ -32,12 +32,12 @@ const generateLearningQuickCoverURL = ({
             {
                 overlay: {
                     font_family: 'Montserrat',
-                    font_size: 130,
+                    font_size: 150,
                     font_weight: 700,
                     text: secondLine.toUpperCase(),
                     text_align: 'right',
                 },
-                width: 1050,
+                width: 1150,
                 crop: 'fit',
                 color: '#ffffff',
                 effect: 'colorize',
@@ -60,7 +60,7 @@ const generateLearningQuickCoverURL = ({
             {
                 overlay: {
                     font_family: 'Montserrat',
-                    font_size: 85,
+                    font_size: 75,
                     text: guestName.toUpperCase(),
                     font_weight: 'bold',
                     text_align: 'right',
@@ -102,24 +102,25 @@ const generateLearningQuickCoverURL = ({
                 width: '600',
                 gravity: 'south_east',
             },
-            // {
-            //     overlay: 'learning_quick:me.png',
-            //     height: '300',
-            //     width: '300',
-            //     y: '150',
-            //     x: '-525',
-            //     radius: 'max',
-            //     border: '6px_solid_rgb:c7d0d9',
-            // },
+            {
+                overlay: 'learning_quick:me.png',
+                height: '400',
+                width: '400',
+                y: '-50',
+                x: '-650',
+                radius: 'max',
+                border: '6px_solid_rgb:c7d0d9',
+            },
             {
                 overlay: `learning_quick:${guestImageName}`,
-                height: '500',
-                width: '500',
+                height: '400',
+                width: '400',
                 y: '150',
-                x: '-260',
+                x: '-400',
                 radius: 'max',
                 // border: '10px_solid_rgb:de5254',
                 crop: 'fill',
+                border: '6px_solid_rgb:c7d0d9',
             },
         ],
     });
