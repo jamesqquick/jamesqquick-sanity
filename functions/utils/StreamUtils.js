@@ -9,7 +9,7 @@ const generateLearningQuickCoverURL = ({
     time,
 }) => {
     console.log(guestImageName);
-    const [firstLine, secondLine] = wrapTitleWords(title, 12);
+    const [firstLine, secondLine] = wrapTitleWords(title, 16);
     console.log(firstLine, secondLine);
     const url = cloudinary.url('learning_quick/lg-bg-3', {
         transformation: [
@@ -21,7 +21,7 @@ const generateLearningQuickCoverURL = ({
                     text: firstLine.toUpperCase(),
                     text_align: 'right',
                 },
-                width: 1150,
+                width: 1250,
                 crop: 'fit',
                 color: '#0E142E',
                 effect: 'colorize',
@@ -37,7 +37,7 @@ const generateLearningQuickCoverURL = ({
                     text: secondLine.toUpperCase(),
                     text_align: 'right',
                 },
-                width: 1150,
+                width: 1250,
                 crop: 'fit',
                 color: '#ffffff',
                 effect: 'colorize',
