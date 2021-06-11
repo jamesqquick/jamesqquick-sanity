@@ -21,7 +21,7 @@ const minifyRecord = (record) => {
 const getRecentVideos = async () => {
     const videos = await contentTable
         .select({
-            filterByFormula: `{status}="Published"`,
+            filterByFormula: `AND({status}="Published", {archived}=FALSE())`,
         })
         .firstPage();
     return minifyRecords(videos);
@@ -33,6 +33,7 @@ const getShares = async () => {
             filterByFormula: `AND({emailed}=FALSE(), {emailable}=TRUE(), {archived}=FALSE())`,
         })
         .firstPage();
+    console.log(records);
     return minifyRecords(records);
 };
 
