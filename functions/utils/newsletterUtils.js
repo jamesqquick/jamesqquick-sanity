@@ -14,7 +14,7 @@ const generateNewsletter = async () => {
     const streamInfo = await getCurrentStream();
     const headerTemplate = getHeaderTemplate(newsletterInfo);
     const streamTemplate = getStreamTemplate(streamInfo);
-    const recentVideosTemplate = getJQQLinksTemplate(videos);
+    const recentVideosTemplate = getRecentVideosTemplate(videos);
     const sharesTempalte = getLBTLinksTemplate(shares);
     const promoTemplate = getPromoTemplate();
     const footerTemplate = getFooterTemplate();
@@ -44,13 +44,13 @@ const getLBTLinksTemplate = (records) => {
     return header + links + '<br>' + closing;
 };
 
-const getJQQLinksTemplate = (records) => {
+const getRecentVideosTemplate = (records) => {
     const header = `<h1>Recent Videos</h1>`;
-
     const links = records
-        .map(
-            (record) => `<li><a href="${record.link}">${record.title}</a></li>`
-        )
+        .map((record) => {
+            const smallImageURL = record.coverImage[0].thumbnails.large.url;
+            return `</br><h3><a href="${record.link}">${record.title}</a></h3><br/><img src="${smallImageURL}" alt="${record.title} Cover Image"/><br/>`;
+        })
         .join('');
     return header + '</br>' + links;
 };
