@@ -26,6 +26,7 @@ const generateLearningQuickCoverURL = ({
                 effect: 'colorize',
                 y: '-280',
                 x: '50',
+                crop: 'limit',
                 gravity: 'east',
             },
             {
@@ -41,6 +42,7 @@ const generateLearningQuickCoverURL = ({
                 effect: 'colorize',
                 y: '-130',
                 x: '50',
+                crop: 'limit',
                 gravity: 'east',
             },
             {
@@ -53,6 +55,7 @@ const generateLearningQuickCoverURL = ({
                 effect: 'colorize',
                 y: '500',
                 x: '50',
+                crop: 'limit',
                 gravity: 'south_east',
             },
             {
