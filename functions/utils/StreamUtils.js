@@ -8,7 +8,7 @@ const generateLearningQuickCoverURL = ({
     guestImageName,
     time,
 }) => {
-    console.log(guestImageName);
+    console.log(guestTitle);
     const [firstLine, secondLine] = wrapTitleWords(title, 16);
     console.log(firstLine, secondLine);
     const url = cloudinary.url('learning_quick/lg-bg-3', {
