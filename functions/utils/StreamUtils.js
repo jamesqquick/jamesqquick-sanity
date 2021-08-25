@@ -78,7 +78,7 @@ const generateLearningQuickCoverURL = ({
                 overlay: {
                     font_family: 'Montserrat',
                     font_size: 38,
-                    text: guestTitle.toUpperCase(),
+                    text: guestTitle ? guestTitle.toUpperCase() : "",
                     text_align: 'right',
                 },
                 color: '#ffffff',
