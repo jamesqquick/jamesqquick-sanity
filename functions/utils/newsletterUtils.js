@@ -14,15 +14,15 @@ const generateNewsletter = async () => {
     const streamInfo = await getCurrentStream();
     const headerTemplate = getHeaderTemplate(newsletterInfo);
     const streamTemplate = getStreamTemplate(streamInfo);
-    const recentVideosTemplate = getJQQLinksTemplate(videos);
-    const sharesTempalte = getLBTLinksTemplate(shares);
+    const recentVideosTemplate = getRecentVideosTemplate(videos);
+    const sharesTemplate = getLBTLinksTemplate(shares);
     const promoTemplate = getPromoTemplate();
     const footerTemplate = getFooterTemplate();
     return [
         headerTemplate,
         streamTemplate,
         recentVideosTemplate,
-        sharesTempalte,
+        sharesTemplate,
         promoTemplate,
         footerTemplate,
     ].join('<br>');
@@ -44,34 +44,34 @@ const getLBTLinksTemplate = (records) => {
     return header + links + '<br>' + closing;
 };
 
-const getJQQLinksTemplate = (records) => {
+const getRecentVideosTemplate = (records) => {
     const header = `<h1>Recent Videos</h1>`;
-
     const links = records
-        .map(
-            (record) => `<li><a href="${record.link}">${record.title}</a></li>`
-        )
+        .map((record) => {
+            const smallImageURL = record.coverImage[0].thumbnails.large.url;
+            return `</br><h3><a href="${record.link}">${record.title}</a></h3><br/><img src="${smallImageURL}" alt="${record.title} Cover Image"/><br/>`;
+        })
         .join('');
     return header + '</br>' + links;
 };
 
 const getStreamTemplate = (streamInfo) => {
-    let coverImageURL;
-    if (streamInfo.coverImage.length > 0) {
-        coverImageURL = streamInfo.coverImage[0].url;
-    }
+    if (!streamInfo) return '';
+    let { coverImageURL } = streamInfo;
+    coverImageURL = coverImageURL.replace('/v1', '/w_600/v1');
+
     return `<h1>Today's Stream - ${streamInfo.streamTitle} with ${streamInfo.fullName}</h1>
   <img src="${coverImageURL}"/><br>
   <p>We will go live at 11 am CST on Twitch! <a href="https://www.twitch.tv/jamesqquick">Join us on Twitch!</a></p>`;
 };
 
 const getPromoTemplate = () => {
-    return `<h1>I'm Starting a Podcast - Compressed.fm</h1>
-  <p>This is something I've thought about for a while and when Amy Dutton asked if I would be interested, I ran with it. We'll be doing <bold>weekly episodes covering both Web Development and Web Design</bold>. We'll release our first episodes in April</p>
-  <p>To stay up to date with our progress, <a href="http://compressed.fm/"><strong>sign up for the newsletter</strong></a>.</p>`;
+    return `<h1>Check out the Compressed.fm Podcast</h1>
+  <p>Check out the weekly podcast focused on Web Development and Design at <a href="http://compressed.fm/">compressed.fm</a>.</p>`;
 };
 
 const getHeaderTemplate = (newsletterInfo) => {
+    if (!newsletterInfo) return '';
     const { intro } = newsletterInfo;
     const introHTML = converter.makeHtml(intro);
     return introHTML;

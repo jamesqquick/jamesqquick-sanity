@@ -5,6 +5,9 @@ exports.handler = async (event) => {
         const newsletter = await generateNewsletter();
         return {
             statusCode: 200,
+            headers: {
+                'Content-Type': 'text/html',
+            },
             body: newsletter,
         };
     } catch (err) {
