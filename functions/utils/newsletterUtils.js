@@ -15,14 +15,14 @@ const generateNewsletter = async () => {
     const headerTemplate = getHeaderTemplate(newsletterInfo);
     const streamTemplate = getStreamTemplate(streamInfo);
     const recentVideosTemplate = getRecentVideosTemplate(videos);
-    const sharesTempalte = getLBTLinksTemplate(shares);
+    const sharesTemplate = getLBTLinksTemplate(shares);
     const promoTemplate = getPromoTemplate();
     const footerTemplate = getFooterTemplate();
     return [
         headerTemplate,
         streamTemplate,
         recentVideosTemplate,
-        sharesTempalte,
+        sharesTemplate,
         promoTemplate,
         footerTemplate,
     ].join('<br>');

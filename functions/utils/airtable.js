@@ -33,7 +33,6 @@ const getShares = async () => {
             filterByFormula: `AND({emailed}=FALSE(), {emailable}=TRUE(), {archived}=FALSE())`,
         })
         .firstPage();
-    console.log(records);
     return minifyRecords(records);
 };
 
