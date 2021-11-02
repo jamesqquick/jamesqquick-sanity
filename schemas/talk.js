@@ -48,6 +48,11 @@ export default {
             of: [{ type: 'reference', to: { type: 'tag' } }],
         },
         {
+            name: 'publishedDateOld',
+            title: 'Published Date',
+            type: 'datetime',
+        },
+        {
             name: 'publishedDate',
             title: 'Published Date',
             type: 'richDate',
