@@ -54,12 +54,12 @@ export default {
         },
        
         {
-            name: 'publishedDateOld',
+            name: 'publishedDate',
             title: 'Published Date',
             type: 'datetime',
         },
         {
-            name: 'publishedDate',
+            name: 'date',
             title: 'Published Date',
             type: 'richDate',
         },
