@@ -84,6 +84,11 @@ export default {
             type: 'richDate',
         },
         {
+            name: 'date',
+            title: 'Published Date',
+            type: 'richDate',
+        },
+        {
             name: 'mainContent',
             title: 'Main Content',
             type: 'richText',
