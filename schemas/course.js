@@ -67,6 +67,11 @@ export default {
             title: 'Published Date',
             type: 'datetime',
         },
+                {
+            name: 'date',
+            title: 'Published Date',
+            type: 'richDate',
+        },
         {
             name: 'mainContent',
             title: 'Main Content',
