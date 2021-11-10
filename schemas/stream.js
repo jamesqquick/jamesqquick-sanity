@@ -26,12 +26,6 @@ export default {
             type: 'string',
         },
         {
-            name: 'guestImageName',
-            title:
-                'Guest Image Name (image should already be uploaded to Cloudinary)',
-            type: 'string',
-        },
-        {
             name: 'guestTitle',
             title: 'Guest Title',
             type: 'string',
@@ -48,12 +42,6 @@ export default {
             name: 'youTubeVideoId',
             title: 'ID Of the YouTube Video',
             type: 'string',
-        },
-        {
-            name: 'excerpt',
-            title: 'Excerpt',
-            type: 'text',
-            rows: '2',
         },
         {
             name: 'slug',
@@ -92,6 +80,12 @@ export default {
             name: 'mainContent',
             title: 'Main Content',
             type: 'richText',
+        },
+        {
+            name: 'excerpt',
+            title: 'Excerpt',
+            type: 'text',
+            rows: '2',
         },
     ],
     preview: {
